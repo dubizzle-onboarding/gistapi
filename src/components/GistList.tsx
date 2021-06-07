@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import _ from 'lodash'
+import debounce from 'lodash.debounce'
 import styled from 'styled-components'
 import { IGist } from '../interfaces/IGist'
 import Gist from './Gist'
@@ -91,7 +91,7 @@ const GistList = ({ search }: { search: string }) => {
   // Debounce fetch to reduce API calls
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedFetch = useCallback(
-    _.debounce((searchQuery: string) => {
+    debounce((searchQuery: string) => {
       return fetchPublicGists(searchQuery)
     }, 300),
     [] // will be created only once initially

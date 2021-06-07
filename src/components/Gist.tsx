@@ -85,9 +85,11 @@ const Gist = ({ gist }: { gist: IGist }) => {
           Last Updated - <span title={gist.updated_at}>{relativeTime(gist.updated_at)}</span>
         </div>
       </div>
-      <div className="description" style={{ margin: '1rem 0' }}>
-        {gist.description || '-'}
-      </div>
+      {gist.description && (
+        <div className="description" style={{ margin: '1rem 0' }}>
+          {gist.description}
+        </div>
+      )}
       <FilesList>
         {files.length > 1 &&
           files.map((file) => (
