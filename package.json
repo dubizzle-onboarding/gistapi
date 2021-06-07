@@ -12,6 +12,8 @@
     "@types/react": "^17.0.9",
     "@types/react-dom": "^17.0.6",
     "@types/styled-components": "^5.1.9",
+    "human-date": "^1.4.0",
+    "lodash": "^4.17.21",
     "octicons-react-ts": "^1.81.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -47,5 +49,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/human-date": "^1.4.0",
+    "@types/lodash": "^4.14.170"
   }
 }
