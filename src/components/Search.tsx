@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { colors } from '../utils/constants'
 // tslint:disable-next-line: no-var-requires
 const Octicon = require('react-octicon')
 
@@ -13,12 +14,17 @@ const Search = ({ search, setSearch }: { search: string; setSearch: (newVal: str
   return (
     <Wrapper>
       <InputBox>
-        <Octicon name="search" />
+        <SearchIcon name="search" />
         <Input placeholder="Search Gists for the username" value={search} onChange={handleChange} />
       </InputBox>
     </Wrapper>
   )
 }
+
+const SearchIcon = styled(Octicon)`
+  display: flex;
+  align-items: center;
+`
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -27,12 +33,21 @@ const Wrapper = styled.div`
   line-height: 1.5;
   border-radius: 6px;
   margin: 0 16px;
+  color: ${colors.textColor};
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 const InputBox = styled.div`
   border-radius: 4px;
   display: flex;
   width: 400px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 const Input = styled.input`
