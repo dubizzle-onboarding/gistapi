@@ -1,13 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-import Octicon from 'octicons-react-ts'
+const Octicon = require('react-octicon');
 
-const Search= ({search, setSearch} : {search: string, setSearch: Function}) => {
+/**
+ * Displays search component used to search gists but username
+ * @param props Props for Serach input. To get and set search values
+ * @returns React component
+ */
+const Search = ({ search, setSearch }: { search: string, setSearch: Function }) => {
   return (
     <Wrapper>
       <InputBox>
         <Octicon name="search" />
-        <Input placeholder="Search Gists for the username" value={search} onChange={e => {return setSearch(e.target.value)}} />
+        <Input placeholder="Search Gists for the username" value={search} onChange={e => { return setSearch(e.target.value) }} />
       </InputBox>
     </Wrapper>
   )

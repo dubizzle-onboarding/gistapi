@@ -1,6 +1,8 @@
-import { IGistFile } from "./IGistFile";
 import { IGistOwner } from "./IGistOwner";
 
+/**
+ * Interface to contain gist fields
+ */
 export interface IGist {
     comments: number;
     comments_url: string;

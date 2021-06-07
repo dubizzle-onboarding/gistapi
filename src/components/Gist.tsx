@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { relativeTime } from "human-date";
 import { colors, zipFormats } from "../utils/constants";
 
-const Octicon = require('react-octicon');
+const Octicon = require('react-octicon'); // Types unavailable for Octicon, hence used CJS module import
 
 const GistCard = styled.div`
     display: flex;
@@ -29,6 +29,7 @@ const Avatar = styled.img`
     margin-right: 0.5rem;
 `
 
+// Additional props for link
 interface StyledLinkProperties { 
     center: boolean;
     bold: boolean;
@@ -84,12 +85,18 @@ const FilesList = styled.div`
     flex-wrap: wrap;
 `
 
+/**
+ * Displays the data for the gist
+ * @param props Gist provided as props
+ * @returns React component
+ */
 const Gist = ({ gist }: { gist: IGist }) => {
 
     const files = Object.keys(gist.files).map(fileId => {
         const fileObj = gist.files[fileId];
         let fileIconType = "file";
 
+        // Show icon according to input type
         if (fileObj.type === "text/plain") {
             fileIconType = "file-text";
         } else if (zipFormats.includes(fileObj.type)) {
@@ -162,4 +169,4 @@ const Gist = ({ gist }: { gist: IGist }) => {
     </GistCard>;
 }
 
-export default Gist
+export default Gist;

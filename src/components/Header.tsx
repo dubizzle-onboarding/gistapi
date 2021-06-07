@@ -4,7 +4,11 @@ import Search from './Search';
 
 const Octicon = require('react-octicon');
 
-
+/**
+ * Displays header. Does not contain nav elements
+ * @param props Props for Header. To set/get search value
+ * @returns React component
+ */
 const Header = ({search, setSearch} : {search: string, setSearch: Function}) => {
   return (
     <Wrapper>

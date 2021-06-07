@@ -1,3 +1,6 @@
+/**
+ * Zip format mime-types
+ */
 export const zipFormats = [
     'application/gzip',
     'application/zip', 
@@ -7,6 +10,9 @@ export const zipFormats = [
     'application/x-bzip2'
 ];
 
+/**
+ * Colors used in components
+ */
 export const colors = {
     linkColor: '#0265d6',
     textColor: '#626465'

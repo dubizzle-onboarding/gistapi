@@ -6,6 +6,10 @@ import GistList from './components/GistList';
 import Header from "./components/Header";
 import GlobalStyles from "./GlobalStyle";
 
+/**
+ * Root component
+ * @returns React Component
+ */
 const App = () => {
 
   const [search, setSearch] = useState('');

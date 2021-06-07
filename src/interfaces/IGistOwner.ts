@@ -1,3 +1,6 @@
+/**
+ * Interface to contain gist.owner fields
+ */
 export interface IGistOwner {
     avatar_url: string;
     events_url: string;

@@ -6,6 +6,9 @@ import styled from 'styled-components'
 import _ from 'lodash';
 import ErrorMessage from './ErrorMessage';
 
+/**
+ * Bootstrap like container
+ */
 const Container = styled.div`
     padding-right: 15px;
     padding-left: 15px;
@@ -23,6 +26,11 @@ const Container = styled.div`
     }
 `
 
+/**
+ * Convert from OctokitResponse to IGist interface since OctokitResponse type is not exposed
+ * @param gistResponse Gist response from Octokit
+ * @returns List of IGist
+ */
 const mapGistData = (gistResponse: any) => {
     return gistResponse.data.map((gistData: any) => {
         const gist: IGist = {
@@ -50,8 +58,12 @@ const mapGistData = (gistResponse: any) => {
     });
 }
 
+/**
+ * Gist List component. Shows the list of gists from Octokit
+ * @param props Props to get the current search term 
+ * @returns React component
+ */
 const GistList = ({search}: {search: string}) => {
-
     let [publicGists, setPublicGists] = useState<IGist[]>([]);
     let [error, setError] = useState<any>({});
 
@@ -59,6 +71,8 @@ const GistList = ({search}: {search: string}) => {
         let publicGistsResponse: any = {};
         try {
             publicGistsResponse = searchQuery === ""? await getPublicGists() : await getGistForUser(searchQuery);
+
+            // If not OK response and if no gists exist for the user
             if (publicGistsResponse.status !== 200 || publicGistsResponse.data.length === 0) {
                 setError({status: 204});
                 return;
@@ -67,17 +81,17 @@ const GistList = ({search}: {search: string}) => {
             const gists = mapGistData(publicGistsResponse)
     
             setPublicGists(gists);
-            setError({});
+            setError({}); // Clear error
         } catch (error) {
             setError(error);
         }
     };
 
+    // Debounce fetch to reduce API calls
     const debouncedFetch = useCallback(
 		_.debounce((search) => fetchPublicGists(search), 300),
 		[], // will be created only once initially
 	);
-    
 
     useEffect(() => {
         debouncedFetch(search);
