@@ -5,11 +5,11 @@ import Search from './Search';
 const Octicon = require('react-octicon');
 
 
-function Header() {
+const Header = ({search, setSearch} : {search: string, setSearch: Function}) => {
   return (
     <Wrapper>
       <Octicon name="mark-github" mega/>
-      <Search />
+      <Search search={search} setSearch={setSearch} />
     </Wrapper>
   )
 }

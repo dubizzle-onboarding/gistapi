@@ -160,7 +160,6 @@ const Gist = ({ gist }: { gist: IGist }) => {
             ))}
         </FilesList>
     </GistCard>;
-
 }
 
 export default Gist

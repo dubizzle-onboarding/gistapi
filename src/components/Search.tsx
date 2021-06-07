@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import Octicon from 'octicons-react-ts'
 
-const Search = () => {
+const Search= ({search, setSearch} : {search: string, setSearch: Function}) => {
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input placeholder="Search Gists for the username" value={search} onChange={e => {return setSearch(e.target.value)}} />
       </InputBox>
     </Wrapper>
   )
