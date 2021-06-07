@@ -3,7 +3,7 @@
 Functionality included:
 
 - [x] Create a list of public gist available
-- [x] Search Gists for the username
+- [x] Search Gists by the username
 - [x] Use basic state management for getting/setting username and API calls
 - [x] Search input is debounced so as to not make unnecessary calls
 - [x] Show all the relevant meta data available in the response
@@ -14,6 +14,8 @@ Functionality included:
 - [x] **Code comments**
 - [x] **Type checking. The project is converted to TypeScript to provide IDE type checking**
 - [x] **Add tslint/prettier to ensure code quality and consistency**
+- [x] **Add mobile responsiveness**
+- [x] **Deployment. The deployed version can be found [here](https://gistapi-dubizzle-assessment.vercel.app/)**
 
 In Progress:
 
