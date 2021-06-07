@@ -1,0 +1,45 @@
+{
+  "name": "react-octicon",
+  "version": "3.0.1",
+  "description": "A GitHub Octicons icon React component",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "nwb build",
+    "lint": "eslint src tests demo/src",
+    "test": "npm run lint && nwb test",
+    "start": "nwb serve"
+  },
+  "files": [
+    "css",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/insin/react-octicon"
+  },
+  "keywords": [
+    "react-component",
+    "octicon",
+    "icon"
+  ],
+  "author": "Jonny Buchanan <jonathan.buchanan@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/insin/react-octicon/issues"
+  },
+  "homepage": "https://github.com/insin/react-octicon",
+  "dependencies": {
+    "octicons": "4.x",
+    "prop-types": "^15.5.7"
+  },
+  "peerDependencies": {
+    "react": ">=0.13.0"
+  },
+  "devDependencies": {
+    "copy-to-clipboard": "3.x",
+    "eslint-config-jonnybuchanan": "5.x",
+    "nwb": "0.20.x",
+    "react": "16.x",
+    "react-dom": "16.x"
+  }
+}
