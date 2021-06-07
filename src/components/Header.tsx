@@ -1,22 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import Search from './Search';
+import Search from './Search'
 
-const Octicon = require('react-octicon');
+// tslint:disable-next-line: no-var-requires
+const Octicon = require('react-octicon')
 
 /**
  * Displays header. Does not contain nav elements
  * @param props Props for Header. To set/get search value
  * @returns React component
  */
-const Header = ({search, setSearch} : {search: string, setSearch: Function}) => {
-  return (
-    <Wrapper>
-      <Octicon name="mark-github" mega/>
-      <Search search={search} setSearch={setSearch} />
-    </Wrapper>
-  )
-}
+const Header = ({ search, setSearch }: { search: string; setSearch: (newVal: string) => void }) => (
+  <Wrapper>
+    <Octicon name="mark-github" mega={true} />
+    <Search search={search} setSearch={setSearch} />
+  </Wrapper>
+)
 
 const Wrapper = styled.div`
   background-color: #24292e;
@@ -27,6 +26,6 @@ const Wrapper = styled.div`
   line-height: 1.5;
   display: flex;
   align-items: center;
-`;
+`
 
 export default Header

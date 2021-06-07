@@ -1,18 +1,16 @@
-
-import _ from 'lodash';
-import React, { useState } from 'react';
+import _ from 'lodash'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import GistList from './components/GistList';
-import Header from "./components/Header";
-import GlobalStyles from "./GlobalStyle";
+import GistList from './components/GistList'
+import Header from './components/Header'
+import GlobalStyles from './GlobalStyle'
 
 /**
  * Root component
  * @returns React Component
  */
 const App = () => {
-
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('')
 
   return (
     <Wrapper className="App" data-testid="app">
@@ -20,12 +18,12 @@ const App = () => {
       <GistList search={search} />
       <GlobalStyles />
     </Wrapper>
-  );
+  )
 }
 
 const Wrapper = styled.div`
   font-size: 14px;
   line-height: 1.5;
-`;
+`
 
-export default App;
+export default App
