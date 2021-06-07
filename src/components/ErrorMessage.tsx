@@ -10,14 +10,18 @@ const ErrorText = styled.div`
     font-size: 20px;
 `
 
-const ErrorMessage = ({error}: {error: any}) => {
+const ErrorMessage = ({error, query}: {error: any, query?: string}) => {
     let errorMessage = "";
     
     if (error.status === 403) {
         // Forbidden
         errorMessage = "API rate limit exceeded.";
-    } else if (error.status === 400) {
-        errorMessage = "We couldn’t find any gists matching the query.";
+    } else if (error.status === 404) {
+        // Not Found
+        errorMessage = `We couldn’t find any gists matching the query "${query}".`;
+    } else if (error.status === 204) {
+        // No Content
+        errorMessage = `${query} does not have any gists under their account`;
     } else {
         errorMessage = "Something went wrong";
     }

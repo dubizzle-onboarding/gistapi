@@ -59,18 +59,18 @@ const GistList = ({search}: {search: string}) => {
         let publicGistsResponse: any = {};
         try {
             publicGistsResponse = searchQuery === ""? await getPublicGists() : await getGistForUser(searchQuery);
+            if (publicGistsResponse.status !== 200 || publicGistsResponse.data.length === 0) {
+                setError({status: 204});
+                return;
+            }
+    
+            const gists = mapGistData(publicGistsResponse)
+    
+            setPublicGists(gists);
+            setError({});
         } catch (error) {
-            setError(error)
+            setError(error);
         }
-
-        if (publicGistsResponse.status !== 200) {
-            return <>Error</>
-        }
-
-        const gists = mapGistData(publicGistsResponse)
-
-        setPublicGists(gists);
-        setError({});
     };
 
     const debouncedFetch = useCallback(
@@ -84,7 +84,7 @@ const GistList = ({search}: {search: string}) => {
     }, [search])
 
     return <Container>
-        {error.status !== 200 ? <ErrorMessage error={error}/> :  publicGists.map(gist => <Gist gist={gist} key={gist.id} />)}
+        {(error.status && error.status !== 200) ? <ErrorMessage error={error} query={search} /> :  publicGists.map(gist => <Gist gist={gist} key={gist.id} />)}
     </Container>;
 }
 
