@@ -33,10 +33,12 @@ const Avatar = styled.img`
 interface StyledLinkProperties {
   center: boolean
   bold: boolean
+  overflow: boolean
 }
 const StyledLink = styled.a.attrs((props: StyledLinkProperties) => ({
   center: props.center,
   bold: props.bold,
+  overflow: props.overflow,
 }))`
   color: ${colors.linkColor};
   font-size: 14px;
@@ -53,6 +55,13 @@ const StyledLink = styled.a.attrs((props: StyledLinkProperties) => ({
       : ''}
 
   font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
+  ${(props) =>
+    props.overflow
+      ? `
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;`
+      : ''}
 
   :hover {
     text-decoration: underline;
@@ -125,10 +134,14 @@ const Gist = ({ gist }: { gist: IGist }) => {
               <Avatar src={gist.owner?.avatar_url} />
               {gist.owner?.login}
             </StyledLink>
-            <span style={{ margin: '0 0.2rem' }}>{'/'}</span>
-            <StyledLink center={true} bold={true} href={files[0].raw_url}>
-              {files[0].filename}
-            </StyledLink>
+            {files.length !== 0 && (
+              <>
+                <span style={{ margin: '0 0.2rem' }}>{'/'}</span>
+                <StyledLink center={true} bold={true} href={files[0].raw_url}>
+                  {files[0].filename}
+                </StyledLink>
+              </>
+            )}
           </span>
         </div>
         <GistMetrics>
@@ -167,9 +180,11 @@ const Gist = ({ gist }: { gist: IGist }) => {
       <FilesList>
         {files.length > 1 &&
           files.map((file) => (
-            <div key={file.filename} style={{ marginRight: '1rem', width: '33%' }}>
+            <div key={file.filename} style={{ marginRight: '1rem', width: '33%', display: 'flex' }}>
               <FilesIcon name={file.fileIconType} />
-              <StyledLink href={file.raw_url}>{file.filename}</StyledLink>
+              <StyledLink href={file.raw_url} overflow={true}>
+                {file.filename}
+              </StyledLink>
             </div>
           ))}
       </FilesList>
