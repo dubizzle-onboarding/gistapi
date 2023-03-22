@@ -1,17 +1,29 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
+import React, { useContext } from "react";
+import styled from "styled-components";
+import Octicon from "react-octicon";
+import { PageContext } from "../redux/PageContext";
+import { PageContextKeys } from "../redux/keys";
 
 const Search = () => {
+  const { state, dispatch } = useContext(PageContext);
+  // globally search name by context api state
+  const { userName } = state;
+  const searchInput = (e) => {
+    dispatch({ type: PageContextKeys.userName, payload: e.target.value });
+  };
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input
+          placeholder="Search Gists for the username"
+          value={userName}
+          onChange={searchInput}
+        />
       </InputBox>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -33,9 +45,9 @@ const Input = styled.input`
   width: 100%;
   font-size: 16px;
 
-  &:focus{
+  &:focus {
     outline: 0;
   }
 `;
 
-export default Search
+export default Search;
