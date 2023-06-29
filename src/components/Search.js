@@ -34,7 +34,7 @@ const ErrorText = styled.p`
   margin-top: 8px;
 `;
 
-const Search = () => {
+const Search = ({setGists}) => {
   const [username, setUsername] = useState("");
   const [error, setError] = useState(null);
   const [publicGists, setPublicGists] = useState([]);
@@ -57,7 +57,7 @@ const Search = () => {
               data = initialPublicGists;
             }
           } else {
-            data = await getPublicGists();
+           setGists( initialPublicGists);
           }
         }
 
@@ -90,14 +90,6 @@ const Search = () => {
         />
       </InputBox>
       {error && <ErrorText>{error}</ErrorText>}
-      {publicGists &&
-        publicGists.length > 0 &&
-        publicGists.map((gist) => (
-          <div key={gist.id}>
-            <h3>{gist.description}</h3>
-            <p>{gist.html_url}</p>
-          </div>
-        ))}
     </Wrapper>
   );
 };

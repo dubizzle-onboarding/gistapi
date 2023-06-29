@@ -43,7 +43,7 @@ const App = () => {
   return (
     <CacheContext.Provider value={{ getGistForUser, getPublicGists, initialPublicGists }}>
       <Wrapper className="App" data-testid="app">
-        <Header  />
+        <Header setGists={setGists} />
         <GistList gists={gists} />
         <GlobalStyles />
       </Wrapper>

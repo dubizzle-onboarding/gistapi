@@ -14,11 +14,11 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Header = () => {
+const Header = ({setGists}) => {
   return (
     <Wrapper>
       <Octicon name="mark-github" mega />
-      <Search />
+      <Search setGists={setGists}/>
     </Wrapper>
   );
 }
