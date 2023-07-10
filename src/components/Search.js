@@ -1,17 +1,33 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
+import React, { useState } from "react";
+import styled from "styled-components";
+import Octicon from "react-octicon";
+import { connect } from "react-redux";
+import { request as getPublicGists } from "../redux/actions/PublicGists";
+import { debounce } from "lodash";
 
-const Search = () => {
+const Search = ({ getPublicGists }) => {
+  const [value, setValue] = useState();
+
+  const handleSearchChange = debounce((value) => {
+    getPublicGists(value);
+  }, 1000);
+
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input
+          placeholder="Search Gists for the username"
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+            handleSearchChange(e.target.value);
+          }}
+        />
       </InputBox>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -32,10 +48,13 @@ const Input = styled.input`
   border: none;
   width: 100%;
   font-size: 16px;
-
-  &:focus{
+  &:focus {
     outline: 0;
   }
 `;
 
-export default Search
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = { getPublicGists };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
