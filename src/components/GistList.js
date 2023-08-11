@@ -29,7 +29,11 @@ const GistList = () => {
   //     console.log({ allGists });
   //   }, [allGists]);
 
-  return <div>{allGists?.length ? allGists.map((gist) => <Gist data={gist} />) : <div>No Gist Found</div>}</div>;
+  return (
+    <div>
+      {allGists?.length ? allGists.map((gist, index) => <Gist key={`${index}`} data={gist} />) : <div>No Gist Found</div>}
+    </div>
+  );
 };
 
 export default GistList;
