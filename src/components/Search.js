@@ -1,17 +1,43 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import Octicon from 'react-octicon';
+import { getGistForUser } from '../services/gistService';
+import { debounce } from '../debounce';
+import { useDispatch } from 'react-redux';
+import { addAllGists } from '../store/gist/gistSlice';
 
 const Search = () => {
+  const [search, setSearch] = useState('');
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function getGistByName() {
+      try {
+        const singleGist = await getGistForUser(search);
+        if (singleGist?.length) {
+          dispatch(addAllGists(singleGist));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getGistByName();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input
+          value={search}
+          onChange={(e) => debounce(setSearch(e.target.value), 5000)}
+          placeholder="Search Gists for the username"
+        />
       </InputBox>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -33,9 +59,9 @@ const Input = styled.input`
   width: 100%;
   font-size: 16px;
 
-  &:focus{
+  &:focus {
     outline: 0;
   }
 `;
 
-export default Search
+export default Search;
