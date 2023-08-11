@@ -1,3 +1,11 @@
-const Gist = ({ gist }) => <>
+import React from 'react';
 
-export default Gist
+const Gist = ({ data }) => (
+  <div>
+    <div className="top-bar">
+      <div>{data.owner.login}</div>
+    </div>
+  </div>
+);
+
+export default Gist;
