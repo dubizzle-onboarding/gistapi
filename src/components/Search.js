@@ -1,17 +1,54 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
-
+import React, { useState } from "react";
+import styled from "styled-components";
+import Octicon from "react-octicon";
+import { useDispatch } from "react-redux";
+import { setListOfGist } from "../redux/slices/gistSlice";
+import { getGistForUser, getPublicGists } from "../services/gistService";
 const Search = () => {
+  const [serchVal, setSearchVal] = useState("");
+  const dispatch = useDispatch();
+
+  const onChangeSearch = async (e) => {
+    setSearchVal(e.target.value);
+    // Search after 2 sec so the change event occur when user enter all the input
+    debounce(getGistUser(e.target.value));
+  };
+  const getGistUser = async (username) => {
+    try {
+      // If username is empty than call all of the gists api other getGistfor user api
+      const list = username
+        ? await getGistForUser(username)
+        : await getPublicGists();
+      dispatch(setListOfGist(list.data));
+    } catch (error) {
+      dispatch(setListOfGist([]));
+      console.log("Error - Get gist by username", error);
+    }
+  };
+
+  function debounce(func, timeout = 2000) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
+    };
+  }
+
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input
+          placeholder="Search Gists for the username"
+          value={serchVal}
+          onChange={(e) => onChangeSearch(e)}
+        />
       </InputBox>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -33,9 +70,9 @@ const Input = styled.input`
   width: 100%;
   font-size: 16px;
 
-  &:focus{
+  &:focus {
     outline: 0;
   }
 `;
 
-export default Search
+export default Search;
