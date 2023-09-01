@@ -15,7 +15,10 @@ const Search = () => {
   };
   const getGistUser = async (username) => {
     try {
-      // If username is empty than call all of the gists api other getGistfor user api
+      /*
+        If username is empty than call all of the gists api other getGistfor specific user api
+        because when you search empty user in a specif user api it will gives an error
+      */
       const list = username
         ? await getGistForUser(username)
         : await getPublicGists();

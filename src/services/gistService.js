@@ -1,7 +1,5 @@
 import { Octokit } from "@octokit/rest";
-const octokit = new Octokit({
-  auth: "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",
-});
+const octokit = new Octokit();
 
 export const getPublicGists = () => octokit.gists.listPublic();
 
