@@ -1,22 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import Octicon from "react-octicon";
+import { formatDate } from "../utils/formatDate";
 
 const Gist = ({ gist }) => {
+  const { owner, files, created_at, updated_at, description } = gist;
   return (
     <GistWrapper>
       <HeaderSection>
         <UserSection>
-          <UserImage
-            src={"https://avatars.githubusercontent.com/u/32258466?v=4"}
-            alt={"Image"}
-          />
-          <UserName>HamzaKhann</UserName>
+          <UserImage src={owner?.avatar_url} alt={owner?.login} />
+          <UserName>{owner?.login}</UserName>
         </UserSection>
         <InfoContainer>
           <InfoItem>
             <Octicon name="code" />
-            <InfoText>3 Files</InfoText>
+            <InfoText>
+              {Object.keys(files).length}{" "}
+              {Object.keys(files).length > 1 ? "Files" : "File"}
+            </InfoText>
           </InfoItem>
           <InfoItem>
             <Octicon name="repo-forked" />
@@ -33,15 +35,19 @@ const Gist = ({ gist }) => {
         </InfoContainer>
       </HeaderSection>
       <DateSection>
-        <GistDate>Created at: 11/17/2020</GistDate>
-        <GistDate>Last Updated: 11/17/2020</GistDate>
+        <GistDate>Created: {formatDate(created_at)}</GistDate>
+        <GistDate>Updated: {formatDate(updated_at)}</GistDate>
       </DateSection>
-      <Description>Getting Started with Create React App</Description>
+      <Description>{description}</Description>
       <FileContainer>
-        <FileItem>
-          <Octicon name="file-text" />
-          <FileLink href="">machine.js</FileLink>
-        </FileItem>
+        {Object.keys(files).map((fileName) => (
+          <FileItem key={fileName}>
+            <Octicon name="file-text" />
+            <FileLink href={files[fileName].raw_url} target="_blank">
+              {fileName}
+            </FileLink>
+          </FileItem>
+        ))}
       </FileContainer>
     </GistWrapper>
   );
