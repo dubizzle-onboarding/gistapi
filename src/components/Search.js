@@ -14,7 +14,7 @@ const Search = () => {
     
     debounceTimer = setTimeout(() => {
       fetchGistByUser(searchText);
-    }, 500);
+    }, 400);
 
     return () => {
       clearTimeout(debounceTimer);

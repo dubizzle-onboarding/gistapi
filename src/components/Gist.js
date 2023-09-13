@@ -1,10 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import Octicon from "react-octicon";
 import { formatDate } from "../utils/formatDate";
 
 const Gist = ({ gist }) => {
+  
+  // Destructure the gist object
   const { owner, files, created_at, updated_at, description } = gist;
+
   return (
     <GistWrapper>
       <HeaderSection>
@@ -141,4 +145,24 @@ const FileLink = styled.a`
   text-decoration: none;
 `;
 
-export default Gist;
+
+
+
+Gist.propTypes = {
+  gist: PropTypes.shape({
+    owner: PropTypes.shape({
+      avatar_url: PropTypes.string,
+      login: PropTypes.string,
+    }),
+    files: PropTypes.objectOf(
+      PropTypes.shape({
+        raw_url: PropTypes.string,
+      })
+    ),
+    created_at: PropTypes.string,
+    updated_at: PropTypes.string,
+    description: PropTypes.string,
+  }),
+};
+
+export default React.memo(Gist);

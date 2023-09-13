@@ -9,6 +9,7 @@ const GistContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState(null);
 
+  // Fetch all public gist initially
   const fetchAllGist = async () => {
     setLoading(true);
     try {
@@ -17,11 +18,13 @@ const GistContextProvider = (props) => {
       gistCache.set("all", response.data);
       setLoading(false);
     } catch (e) {
-      setServerError(JSON.stringify(e));
+      let error = e.response && e.response.status === 404 ? "No Gist Found":"Some Server Error"
+      setServerError(error);
       setLoading(false);
     }
   };
 
+  // Fetch gist according to search keyword
   const fetchGistByUser = async (username) => {
     if (!username.trim()) {
       setGists(gistCache.get("all"));
@@ -32,15 +35,13 @@ const GistContextProvider = (props) => {
       setGists(cachedGist);
       return;
     }
-    setLoading(true);
     try {
       let response = await getGistForUser(username);
       setGists(response?.data);
       gistCache.set(username, response.data);
-      setLoading(false);
     } catch (e) {
-      setServerError(JSON.stringify(e));
-      setLoading(false);
+      let error = e.response && e.response.status === 404 ? "No Gist Found":"Some Server Error"
+      setServerError(error);
     }
   };
 
