@@ -1,17 +1,39 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
+import React, { useEffect, useContext, useState } from "react";
+import styled from "styled-components";
+import Octicon from "react-octicon";
+import { GistContext } from "../context/GistContext";
 
 const Search = () => {
+  const [searchText, setSearchText] = useState("");
+  const { fetchGistByUser } = useContext(GistContext);
+
+  useEffect(() => {
+    let debounceTimer;
+    
+    clearTimeout(debounceTimer);
+    
+    debounceTimer = setTimeout(() => {
+      fetchGistByUser(searchText);
+    }, 400);
+
+    return () => {
+      clearTimeout(debounceTimer);
+    };
+  }, [searchText]);
+
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Search Gists for the username"
+        />
       </InputBox>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -33,9 +55,9 @@ const Input = styled.input`
   width: 100%;
   font-size: 16px;
 
-  &:focus{
+  &:focus {
     outline: 0;
   }
 `;
 
-export default Search
+export default Search;
