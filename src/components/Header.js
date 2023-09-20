@@ -1,15 +1,15 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
-import Search from './Search';
+import React from 'react';
+import styled from 'styled-components';
+import Search from "./Search";
 
-function Header() {
-  return (
-    <Wrapper>
-      <Octicon name="mark-github" mega/>
-      <Search />
-    </Wrapper>
-  )
+function Header({onSearch}) {
+    return (
+        <Wrapper>
+            <Img src="github-icon.png" alt="" />
+            {/* Include the Search component and pass the `onSearch` prop */}
+            <Search onSearch={onSearch}/>
+        </Wrapper>
+    );
 }
 
 const Wrapper = styled.div`
@@ -21,6 +21,18 @@ const Wrapper = styled.div`
   line-height: 1.5;
   display: flex;
   align-items: center;
+  
+   @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
-export default Header
+const Img = styled.img`
+  width: 30px;
+  margin-right: 10px;
+`;
+
+export default Header;
+
+
+

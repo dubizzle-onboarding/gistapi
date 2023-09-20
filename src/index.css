@@ -1,0 +1,135 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    padding:0px;
+    margin:0px;
+    font-family: 'Poppins', sans-serif;
+    box-sizing:border-box;
+}
+.container{
+    background-color: #ffffff;
+    margin:auto;
+    width:800px;
+}
+.user-wrap{
+    border-bottom:1px solid #eef0f1;
+    padding:20px 15px;
+}
+.user-info{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+}
+.user-info .name-img{
+    display:flex;
+    align-items: center;
+}
+.user-info img{
+    width:30px;
+    height:30px;
+    border-radius:100%;
+    display:inline-block;
+    border:2px solid #eef0f1;
+    margin-right:10px;
+}
+.user-info .name{
+    font-size:16px;
+    font-weight:500;
+    color:#0366d6;
+    display:inline-block;
+    margin:0px;
+}
+.user-info .right-side-info span, .user-info .right-side-info a{
+    font-size:14px;
+    font-weight:500;
+    color:#0366d6;
+    margin:0px 7px;
+    text-decoration:none;
+}
+.user-info .right-side-info i{
+    font-size:18px;
+}
+.user-info .right-side-info a i, .user-info .right-side-info span i:nth-child(2){
+    margin-right:3px;
+}
+.dates{
+    display:flex;
+    margin-top:10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+.dates p{
+    font-size:14px;
+    margin:0px;
+    color:#626465;
+}
+.dates p:first-child{
+    margin-right:15px;
+}
+.description {
+    color: #626465;
+    font-size: 20px;
+    font-weight: 600;
+    overflow-wrap: break-word;
+}
+.files{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.files div{
+    margin:5px 10px;
+}
+.files div span{
+    font-size:14px;
+    font-weight:500;
+    color:#0366d6;
+}
+.files div i{
+    margin-right:10px;
+    color:#0366d6;
+}
+.no-result{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.no-result h5{
+    font-size:20px;
+    font-weight:500;
+    margin:0px;
+}
+.loader{
+    text-align:center;
+}
+.loader i{
+    font-size:60px;
+}
+
+@media only screen and (max-width: 768px){
+    .container{
+        width:100%;
+    }
+    .user-info {
+        flex-wrap: wrap;
+    }
+    .user-info .name{
+        font-size:14px;
+        margin-bottom:10px;
+    }
+    .user-info img{
+        width:25px;
+        height:25px;
+    }
+    .user-info .right-side-info span, .user-info .right-side-info a,  .files div span{
+        font-size: 11px;
+    }
+    .dates p{
+        font-size:12px;
+    }
+    .description{
+        font-size:14px;
+    }
+}
