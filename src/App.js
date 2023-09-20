@@ -1,15 +1,13 @@
+import React from 'react';
+import Home from './components/Home';
 
-import styled from 'styled-components'
-import Header from "./components/Header";
-import GlobalStyles from "./GlobalStyle";
-
-const App = () => {
-  return (
-    <Wrapper className="App" data-testid="app">
-      <Header />
-      <GlobalStyles />
-    </Wrapper>
-  );
+function App() {
+    return (
+        <div>
+            {/* Render the Home component, which contains the main application logic */}
+            <Home />
+        </div>
+    );
 }
 
 export default App;
