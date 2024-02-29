@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import ProductFilters from './ProductFilters';
 import ProductItems from './ProductItems';
 
-const ProductListContainer = () => {
-  const [selectedCategory, setSelectedCategory] = useState('Electronics');
+const ProductListContainer = (props) => {
+  const [selectedCategory, setSelectedCategory] = useState(props.user.preferredCategory);
 
   const handleCategoryChange = (newCategory) => {
     setSelectedCategory(newCategory);
