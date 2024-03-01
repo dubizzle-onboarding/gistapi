@@ -11,9 +11,33 @@ const ProductFilters = ({ handleCategoryChange }) => {
     setSortedFilters(newFilters);
   }, [filters]);
 
+  const renderButtons = (filter) => {
+    const buttons = [];
+    const buttonValues = ['create', 'delete', 'update'];
+    const handleClick = (value) => {
+      handleCategoryChange(value);
+    };
+
+    for (let i = 0; i < buttonValues.length; i++) {
+      buttons.push(
+        <button key={i} onClick={() => handleClick(filter.name, buttonValues[i])}>
+          Increment by {buttonValues[i]}
+        </button>
+      );
+    }
+
+    return buttons;
+  };
+
+
   return (
     <div>
-      {sortedFilters.map(filter => <button onClick={() => handleCategoryChange(filter.name)}>Show {filter.name}</button>)}
+      {sortedFilters.map(filter => (
+        <form>
+          <label>Show {filter.name}</label>
+          {renderButtons(filter)}
+        </form>
+      ))}
     </div>
   );
 };
